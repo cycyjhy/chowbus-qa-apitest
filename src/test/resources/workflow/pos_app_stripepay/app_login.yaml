@@ -19,7 +19,7 @@ validation:
 responseParam:
   expressions:
     - path: access_token
-      value: token
+      value: access_token
 waitTime: 0
 caseType: http
 role: designer

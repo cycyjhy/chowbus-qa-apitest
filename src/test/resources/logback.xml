@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <appender class="ch.qos.logback.core.ConsoleAppender" name="logger_stdout">
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <Pattern>%d{YYYY-MM-dd HH:mm:ss} %highlight(%-5level) %msg%n</Pattern>
+    </encoder>
+  </appender>
+  <appender class="ch.qos.logback.core.FileAppender" name="logger_file">
+    <append>false</append>
+    <encoder>
+      <pattern>%d{YYYY-MM-dd HH:mm:ss} %-5level %logger - %msg%n</pattern>
+    </encoder>
+    <file>apitest.log</file>
+  </appender>
+
+  <logger level="ERROR" name="org.apache"/>
+  <logger level="ERROR" name="org.apache.http.wire"/>
+  <logger level="ERROR" name="org.apache.http.headers"/>
+  <logger level="OFF" name="com.alipay"/>
+  <logger level="info" name="com.homestyler.deco.qa"/>
+
+  <property name="APP_NAME" value="apitest"/>
+  <property name="LOG_PATH" value="${user.home}/${APP_NAME}/logs"/>
+  <property name="LOG_FILE" value="${LOG_PATH}/application.log"/>
+
+  <root level="INFO">
+    <appender-ref ref="logger_stdout"/>
+    <appender-ref ref="logger_file"/>
+  </root>
+</configuration>

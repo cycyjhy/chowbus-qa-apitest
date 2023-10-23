@@ -27,7 +27,7 @@ public class BaseTest {
     @BeforeSuite
     public void beforeSuite() {
 //        initSid();
-//        initGlobalData();
+        initGlobalData();
         initGlobalDataFromYaml();
         testContext.setGlobalData(globalData);
         getUsername();
