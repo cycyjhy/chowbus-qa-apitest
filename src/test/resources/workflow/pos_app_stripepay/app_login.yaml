@@ -1,11 +1,11 @@
 request:
   api:
-    url: https://pos-api-staging-01.chowbus.com/api/v1/login/pin
+    url: https://{{url_staging_03}}/api/v1/login/pin
     method: POST
     body: '{
-	"restaurant_id": "230",
+	"restaurant_id": "{{restaurant_id}}",
 	"grant_type": "password",
-	"pin": "1111"
+	"pin": "{{pin}}"
 }'
     header:
       Content-Type: application/json

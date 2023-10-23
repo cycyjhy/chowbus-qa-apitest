@@ -2,5 +2,5 @@ name: pos_app_stripepay
 steps:
   - test: app_login.yaml #登陆app
 tags:
-  - http
+  - pos_app_stripepay
 desc: demo1
