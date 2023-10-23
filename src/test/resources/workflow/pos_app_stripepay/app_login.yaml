@@ -1,0 +1,26 @@
+request:
+  api:
+    url: https://pos-api-staging-01.chowbus.com/api/v1/login/pin
+    method: POST
+    body: '{
+	"restaurant_id": "230",
+	"grant_type": "password",
+	"pin": "1111"
+}'
+    header:
+      Content-Type: application/json
+      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36
+validation:
+  expressions:
+    - condition: equals
+      path: family_name
+      value: 230
+responseParam:
+  expressions:
+    - path: access_token
+      value: token
+waitTime: 0
+caseType: http
+role: designer
+desc: pos_app登录接口

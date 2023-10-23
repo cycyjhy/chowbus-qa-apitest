@@ -1,0 +1,6 @@
+name: pos_app_stripepay
+steps:
+  - test: app_login.yaml #登陆app
+tags:
+  - http
+desc: demo1

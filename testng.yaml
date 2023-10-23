@@ -1,0 +1,6 @@
+name: Deco Api Test
+tests:
+  - name: deco-apitest
+    classes:
+      - com.chowbus.qa.ApiTest
+
