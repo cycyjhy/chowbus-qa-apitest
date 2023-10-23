@@ -9,11 +9,13 @@ import com.chowbus.qa.datamodel.workflow.WorkflowStep;
 import com.chowbus.qa.utility.TestCaseUtilities;
 import com.jayway.jsonpath.JsonPath;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 public class ResponseValidateHandler extends Handler {
 
   /**
@@ -47,6 +49,7 @@ public class ResponseValidateHandler extends Handler {
           workflowStep.getTest() + " : resp validation condition is null");
       String value = JsonPath.read(workflowStep.getStepResult(),
           "$." + responseValidationExpression.getPath()).toString();
+      log.info("value的值为"+value);
       Assert.assertNotNull(value);
       String val = responseValidationExpression.getValue();
       if(val.startsWith("{{")&&val.endsWith("}}")){
@@ -55,12 +58,16 @@ public class ResponseValidateHandler extends Handler {
         val = globalData.get(val1);
         Assert.assertNotNull(val, "Assert value is null");
       }
+      log.info("val的值"+val);
 
       switch (condition) {
         // 相等
         case EQUALS:
 
           Assert.assertEquals(value, val);
+          log.info("断言相等");
+
+
           break;
         // 正则
         case REGEX:

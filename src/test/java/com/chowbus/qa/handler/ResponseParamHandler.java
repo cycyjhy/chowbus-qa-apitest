@@ -40,7 +40,7 @@ public class ResponseParamHandler extends Handler {
       log.info("根据jsonpath[{}]提取变量[{}]的值为: {}", jsonPath, key, value);
       testContext.getGlobalData().put(key, value);
     }
-    next.doHandle(workflowStep, testContext);
+//    next.doHandle(workflowStep, testContext);
   }
 
   @Data

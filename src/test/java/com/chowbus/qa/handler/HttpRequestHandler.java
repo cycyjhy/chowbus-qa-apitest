@@ -30,7 +30,7 @@ public class HttpRequestHandler extends Handler {
     HttpResponse httpResponse = executeHttpRequest(httpTestCase.getRequest());
     workflowStep.setStepResult(httpResponse.getBody());
     System.out.println(" httpResponse.getBody:" + httpResponse.getBody());
-//    next.doHandle(workflowStep, testContext);
+    next.doHandle(workflowStep, testContext);
   }
 
 
@@ -94,14 +94,6 @@ public class HttpRequestHandler extends Handler {
     } catch (IOException e) {
       e.printStackTrace();
     }
-//      JSONObject jsonObject = JSON.parseObject(reqBody);
-//      String state = (String) jsonObject.getString("state");
-//      String data = (String) jsonObject.getString("data");
-
-//      httpResponse.setData(data);
-//      System.out.println(state);
-//      System.out.println(data);
-//      System.out.println(data);
 
     HttpResponse httpResponse = new HttpResponse();
     httpResponse.setBody(reqBody);
