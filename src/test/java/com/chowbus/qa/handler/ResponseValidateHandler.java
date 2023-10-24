@@ -52,13 +52,15 @@ public class ResponseValidateHandler extends Handler {
       log.info("value的值为"+value);
       Assert.assertNotNull(value);
       String val = responseValidationExpression.getValue();
+      log.info("val的值"+val);
       if(val.startsWith("{{")&&val.endsWith("}}")){
         String val1 = val.replaceAll("\\{|\\}","");
         Map<String, String> globalData= testContext.getGlobalData();
         val = globalData.get(val1);
+        log.info("通过全局变量获取的val的值"+val);
         Assert.assertNotNull(val, "Assert value is null");
       }
-      log.info("val的值"+val);
+
 
       switch (condition) {
         // 相等

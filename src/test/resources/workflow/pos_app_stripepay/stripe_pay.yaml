@@ -117,7 +117,7 @@ validation:
   expressions:
     - condition: equals
       path: id
-      value: {{order_id}}
+      value: "{{order_id}}"
 responseParam:
   expressions:
     - path: order_number

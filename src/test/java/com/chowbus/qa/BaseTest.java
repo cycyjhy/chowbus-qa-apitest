@@ -45,7 +45,7 @@ public class BaseTest {
      * 可以用来测试前初始化一些全局的变量,例如时间戳,7天前时间戳等等,按需添加
      */
     private void initGlobalData() {
-        log.info("初始化全局变量");
+
         Map<String, String> param = new HashMap<>();
         long ts = System.currentTimeMillis();
         param.put("ts", String.valueOf(ts));
@@ -72,7 +72,7 @@ public class BaseTest {
         param.put("customized_id2",customized_id2);
         param.put("cart_number",cart_number);
         param.put("nowTime",String.valueOf(nowTime));
-
+        log.info("初始化生成的全局变量 {} 为:",param);
 
 
         globalData.putAll(param);

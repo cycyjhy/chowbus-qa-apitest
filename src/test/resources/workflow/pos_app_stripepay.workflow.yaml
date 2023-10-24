@@ -4,5 +4,5 @@ steps:
   - test: stripe_pay.yaml #登陆app
 
 tags:
-  - pos_app_stripepay
+  - pos_app_stripe_pay
 desc: demo1
