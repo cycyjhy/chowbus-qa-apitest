@@ -51,8 +51,12 @@ public class ResponseValidateHandler extends Handler {
           "$." + responseValidationExpression.getPath()).toString();
       log.info("value的值为"+value);
       Assert.assertNotNull(value);
-      String val = responseValidationExpression.getValue();
-      log.info("val的值"+val);
+
+      switch (condition) {
+        // 相等
+        case EQUALS:
+          String val = responseValidationExpression.getValue();
+          log.info("val的值"+val);
       if(val.startsWith("{{")&&val.endsWith("}}")){
         String val1 = val.replaceAll("\\{|\\}","");
         Map<String, String> globalData= testContext.getGlobalData();
@@ -60,14 +64,8 @@ public class ResponseValidateHandler extends Handler {
         log.info("通过全局变量获取的val的值"+val);
         Assert.assertNotNull(val, "Assert value is null");
       }
-
-
-      switch (condition) {
-        // 相等
-        case EQUALS:
-
-          Assert.assertEquals(value, val);
-          log.info("断言相等");
+      Assert.assertEquals(value, val);
+      log.info("断言相等");
 
 
           break;
@@ -82,8 +80,10 @@ public class ResponseValidateHandler extends Handler {
           break;
         //非空
         case NOTNULL:
+          log.info("结果不为空");
+
           Assert.assertNotNull(value,
-                  workflowStep.getTest() + " : 关联商品未生效！");
+                  workflowStep.getTest() + " 结果为空");
           break;
 
         default:

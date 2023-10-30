@@ -1,0 +1,46 @@
+request:
+  api:
+    url: https://graph-staging-03.chowbus.com/graph/query
+    method: POST
+    body: '{
+  "operationName": "RestaurantPayoutsTable",
+  "variables": {
+    "filter": {
+      "serviceRegionID": "1",
+      "payoutStates": [
+        "pending",
+        "retrying",
+        "fund_transfer_successful",
+        "fund_transfer_failed",
+        "in_transit",
+        "paid",
+        "failed",
+        "canceled"
+      ],
+      "dateRange": {
+        "startAt": "2023-09-30T00:00:00-05:00",
+        "endAt": "2023-10-30T23:59:59-05:00"
+      }
+    },
+    "limit": 25,
+    "offset": 0
+  },
+  "query": "query RestaurantPayoutsTable($filter: PayoutFilterInput!, $limit: Int, $offset: Int) {\n  payouts(filter: $filter, limit: $limit, offset: $offset) {\n    edges {\n      node {\n        id\n        number\n        amount\n        createdAt\n        currency\n        descriptor\n        estimatedArrival\n        reportCategories\n        retriedByEmail\n        payoutType\n        publicNote\n        state\n        account {\n          thirdPartyID\n          thirdPartyType\n          owner {\n            payPartyID\n            payPartyType\n            payParty {\n              ... on Restaurant {\n                id\n                name\n                __typename\n              }\n              __typename\n            }\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    totalCount\n    pageInfo {\n      hasNextPage\n      __typename\n    }\n    __typename\n  }\n}\n"
+}'
+    header:
+      Content-Type: application/json
+      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36
+      Authorization: Bearer eyJraWQiOiI3OTYxOGZlNGNmZGUwYjUwYjk1ZWUzYjk5YjE2MjI5MDVmNjM1NTk1YWNjN2FjYTViZmJiZTU2ZmE2N2Q4ZDMzIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIyNTIyIiwiZW1haWwiOiJ5aW5nLmNoZW5AY2hvd2J1cy5jb20iLCJwaG9uZV9udW1iZXIiOm51bGwsInBob25lX251bWJlcl92ZXJpZmllZCI6bnVsbCwiZ2l2ZW5fbmFtZSI6IllpbmciLCJmYW1pbHlfbmFtZSI6IkNoZW4iLCJ6b25laW5mbyI6bnVsbCwiY2hvd2J1cy5jb20vc2lnbmVkX3VwX2F0IjoiMjAyMy0xMC0xMFQwNjo1NzoxN1oiLCJjaG93YnVzLmNvbS9pZGVudGl0eSI6ImFkbWluIiwiY2hvd2J1cy5jb20vcGVybWlzc2lvbnMiOiJhdXRoOndlYl9iYXNpYzpyZWFkWzBdLGF1dGg6b3BzX3JvbGU6YXNzaWduWzBdLG1vbm9saXRoOndlYl9iYXNpYzphY2Nlc3NbMF0sbW9ub2xpdGg6d2ViX2Z1bGw6YWNjZXNzWzBdLGF1dGg6d2ViX2Jhc2ljOm1hbmFnZVswXSxhdXRoOnVzZXI6bWFuYWdlWzBdLG1vbm9saXRoOmR0ZF9ibGFja291dDptYW5hZ2VbMF0sbW9ub2xpdGg6cHJvbW90aW9uOm1hbmFnZVswXSxhdXRoOndlYl9iYXNpYzp3cml0ZVswXSxhdXRoOnVzZXI6d3JpdGVbMF0sbW9ub2xpdGg6ZHRkX2JsYWNrb3V0OndyaXRlWzBdLG1vbm9saXRoOnByb21vdGlvbnM6bWFuYWdlWzBdLG1vbm9saXRoOnJlZnVuZF9yZXF1ZXN0Om1hbmFnZVswXSxtb25vbGl0aDpyZXN0YXVyYW50X2dyb3VwOm1hbmFnZVswXSxtb25vbGl0aDpvcmRlcjpzZWFyY2hbMF0sYXV0aDpmcmF1ZF9mbGFnOm1hbmFnZVswXSxhdXRoOnVzZXJfYmxvY2s6bWFuYWdlWzBdLG1ha29tbzpjb3JlX2JpbGxhYmxlOm1hbmFnZVswXSxtYWtvbW86dGF4X2JpbGxhYmxlOm1hbmFnZVswXSxydXRoOmRlYWxfY29udHJhY3Q6bWFuYWdlWzBdLG1ha29tbzpkaXNwbGF5X3NldHRpbmc6bWFuYWdlWzBdLHNvbmE6YWdlbnRfcGF5Om1hbmFnZVswXSxzb25hOmFnZW50X2luY29tZTptYW5hZ2VbMF0sbW9ub2xpdGg6bWVhbF9wcmljZV9yZXN0YXVyYW50X3doaXRlbGlzdDptYW5hZ2VbMF0sbW9ub2xpdGg6bWVhbF9wcmljZV9yZXN0YXVyYW50X2JsYWNrbGlzdDptYW5hZ2VbMF0sbWFrb21vOnRlbXBsYXRlX2dyb3VwOnJlYWRbMF0sbWFrb21vOmNvcmVfYmlsbGFibGU6cmVhZFswXSxtb25vbGl0aDpyZWZ1bmRfcmVhc29uOm1hbmFnZVswXSxtb25vbGl0aDpjYXRhbG9nOm1hbmFnZVswXSxtb25vbGl0aDpjb250cmFjdF9hY3RpdmF0ZTptYW5hZ2VbMF0sbW9ub2xpdGg6Y29udHJhY3RfZGVhY3RpdmF0ZTptYW5hZ2VbMF0sbW9ub2xpdGg6cHJvbW90aW9uOnNlYXJjaFswXSxtb25vbGl0aDpta3RfZW1haWw6bWFuYWdlWzBdLG1vbm9saXRoOmJhbm5lcjptYW5hZ2VbMF0sbW9ub2xpdGg6bWt0X2VtYWlsOndyaXRlWzBdLG1vbm9saXRoOmJhbm5lcjp3cml0ZVswXSxtb25vbGl0aDpzaGFyaW5nX3NldHRpbmc6bWFuYWdlWzBdLG1vbm9saXRoOnRhZzptYW5hZ2VbMF0sbW9ub2xpdGg6ZGluZXJfbm90aWNlX3RlbXBsYXRlOm1hbmFnZVswXSxtb25vbGl0aDpmb3J0dW5lX2Nvb2tpZV9jb25maWd1cmF0aW9uOm1hbmFnZVswXSxtYWtvbW86cG9zX2JpbGxhYmxlOm1hbmFnZVswXSxtYWtvbW86cG9zX3dpZGdldF9iaWxsYWJsZTptYW5hZ2VbMF0scG9zOnBlcm1pc3Npb246bWFuYWdlWzBdLHBvczp2aXJ0dWFsX3N1cGVyX2FkbWluX3JvbGVzOm1hbmFnZVswXSxtb25vbGl0aDpyZXN0YXVyYW50X3Jlc291cmNlOm1hbmFnZVswXSxzb25hOmNvbmZpZ3VyYXRpb246bWFuYWdlWzBdLGF1dGg6cmVzdGF1cmF0ZXVyOm1hbmFnZVswXSxtb25vbGl0aDpyZXN0YXVyYW50X2NvbGxlY3Rpb25faXRlbTptYW5hZ2VbMF0scnV0aDpkZWFsOm1hbmFnZVswXSxtb25vbGl0aDpjb3Vwb25fc2V0dGluZzptYW5hZ2VbMF0sd2FsbGV0OmdpZnRfY2FyZF9kZWFsX2NvbnRyYWN0Om1hbmFnZVswXSxtb25vbGl0aDptZWFsX2NvbGxlY3Rpb25faXRlbTptYW5hZ2VbMF0sbW9ub2xpdGg6a2lvc2tfc2V0dGluZzptYW5hZ2VbMF0sYmlsbGluZ19zZXR0bGVtZW50OnJlc3RhdXJhbnRfcGF5b3V0OnJlYWRbMF0sYmlsbGluZ19zZXR0bGVtZW50OnJlc3RhdXJhbnRfaW52b2ljZTpyZWFkWzBdLG1vbm9saXRoOnJlc3RhdXJhbnRfY29sbGVjdGlvbjptYW5hZ2VbMF0iLCJjaG93YnVzLmNvbS9zY29wZXMiOiJzZXJ2aWNlX3JlZ2lvbjoqIiwiY2hvd2J1cy5jb20vcmVzdGF1cmFudF9pZCI6bnVsbCwiY2hvd2J1cy5jb20vcmVzdGF1cmFudF9kZXZpY2VfaWQiOm51bGwsImNob3didXMuY29tL3NlcnZpY2VfcmVnaW9uX2lkIjpudWxsLCJjaG93YnVzLmNvbS9zZXJ2aWNlX3JlZ2lvbl9uYW1lIjpudWxsLCJjaG93YnVzLmNvbS9yYW5kb21pemVyIjoiYTZhNjg2NjEtNDNmOS00YWY3LWJiOTktNDI1MzEwZGEzN2ZjIiwiZXhwIjoxNjk4NjU5MzA4LCJpYXQiOjE2OTg2NTc1MDgsImlzcyI6Imh0dHBzOi8vYXV0aC1zdGFnaW5nLTAzLmNob3didXMuY29tIn0.RkQZ-eCqTGcnY2PpCTpLqPx8QINij9S4CXl_OptCEffq8jY-Zv-0S7JIJ5EtY2pUICwEyEydCOeHaF8-hojoYbCTADrAFxOExzCdmErugTTFlhs4valANcXInO8wQzUDz6IguB71owpcaqP57pdjLNeRUbM0XvS8PaULdjCiCX1VCBZfHkCptPCQCqlU5UIiAAGYF91hFgtbHLjAH25KIMcA6lxR_cYl8DDPvrh1D2g33K3EZrWojmAMX3WLYdTNQRyYiSLMXg6eqcrJYrEm5LeXW8xs0-Zh6SQ6RU7B2xWvOkA6yKADM2qilcqapYuzFEA6Fre6M55PjTfGv44rtUb54CRqI8-cSFI1-3lbj-2j4MR7Nf3dDMFfC0WkTt4npWEbdI3n3LcPi3ulftO4FIkvdpVsDONacGI4f44_xG4_17rjUwycCg_XBIXmNmgYSmo5NlSQ-WBeHEFjOqKREnJmJrBZ0vX4_7APVrYPZ7a5UaW8lzzHtqTqcXkHmZOSpAiu78PXGM-sBJRKeAHObwjETUjpcfTHPbXteOR7fEDm6vzCLkm3rgp3wR9kmaZHa6RXDOSijNqbPVVSqL1pMeiCJWaUSLR7xqwKL7UmMa2RJCbORZkaoKgU_kq4tE2unzMaMjfZB3veDKiUtj72aEeZspj4Ih3OWPGhGEbI0Mo
+validation:
+  expressions:
+    - condition: not_null
+      path: data
+      value:
+responseParam:
+  expressions:
+#    - path:
+#      value:
+waitTime: 0
+caseType: http
+desc: backend_payout的接口

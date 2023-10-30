@@ -2,6 +2,7 @@ package com.chowbus.qa;
 
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
@@ -72,6 +73,50 @@ public class BaseTest {
         param.put("customized_id2",customized_id2);
         param.put("cart_number",cart_number);
         param.put("nowTime",String.valueOf(nowTime));
+
+
+
+        SimpleDateFormat dateFormat= new SimpleDateFormat("MM-dd-yyyy");
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_WEEK,-1);
+        String yesterday=dateFormat.format(calendar.getTime());
+        calendar.add(Calendar.DAY_OF_WEEK,1);
+        String today=dateFormat.format(calendar.getTime());
+
+
+
+
+
+        calendar.setTime(new Date());
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        String monday=dateFormat.format(calendar.getTime());
+        calendar.add(Calendar.DAY_OF_WEEK,6);
+        String sunday=dateFormat.format(calendar.getTime());
+
+
+        calendar.setTime(new Date());
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        calendar.add(Calendar.DAY_OF_WEEK,-1);
+        String lastsunday=dateFormat.format(calendar.getTime());
+        calendar.add(Calendar.DAY_OF_WEEK,-6);
+        String lastmonday=dateFormat.format(calendar.getTime());
+
+
+        calendar.setTime(new Date());
+        calendar.add(Calendar.MONTH,-1);
+        calendar.set(Calendar.DAY_OF_MONTH,calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+        String lastmonth_firstday=dateFormat.format(calendar.getTime());
+        calendar.set(Calendar.DAY_OF_MONTH,calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        String lastmonth_lastday=dateFormat.format(calendar.getTime());
+
+
+        calendar.setTime(new Date());
+        calendar.set(Calendar.DAY_OF_MONTH,calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+        String thismonth_firstday=dateFormat.format(calendar.getTime());
+        calendar.set(Calendar.DAY_OF_MONTH,calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        String thismonth_lastday=dateFormat.format(calendar.getTime());
+
+
         log.info("初始化生成的全局变量 {} 为:",param);
 
 

@@ -10,6 +10,7 @@ import com.chowbus.qa.utility.TestCaseUtilities;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -18,6 +19,7 @@ import org.apache.http.util.EntityUtils;
 import org.testng.Assert;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
 
 @Slf4j
@@ -47,10 +49,12 @@ public class HttpRequestHandler extends Handler {
     }
 
     HttpTestCase httpTestCase = TestCaseUtilities.fromYamlString(testContent, HttpTestCase.class);
+
+    if(httpTestCase.getRequest().getApi().getMethod().equals("POST")){
     if (!TestCaseUtilities.isJson(httpTestCase.getRequest().getApi().getBody())) {
       Assert.fail("接口:" + httpTestCase.getRequest().getApi().getUrl() + " .请求数据不是标准json格式: "
           + httpTestCase.getRequest().getApi().getBody());
-    }
+    }}
 
     return httpTestCase;
   }
@@ -62,39 +66,51 @@ public class HttpRequestHandler extends Handler {
    */
   HttpResponse executeHttpRequest(HttpRequest httpRequest) {
     //创建一个可关闭的HttpClient对象
+    String reqBody = null;
+    CloseableHttpResponse  response = null;
 
     CloseableHttpClient httpclient = HttpClients.createDefault();
     String url = httpRequest.getApi().getUrl();
-    Map<String, String> header = httpRequest.getApi().getHeader();
-    System.out.println("header：" + header);
     String methodType = httpRequest.getApi().getMethod();
-    String body = httpRequest.getApi().getBody();
-    HttpPost httppost = new HttpPost(url);
-    for (Map.Entry<String, String> entry : header.entrySet()) {
-      httppost.setHeader(entry.getKey(), entry.getValue());
-      System.out.println("key = " + entry.getKey() + ", value = " + entry.getValue());
+    if(methodType.equals("POST")){
+      HttpPost httppost = new HttpPost(url);
+      Map<String, String> header = httpRequest.getApi().getHeader();
+      for (Map.Entry<String, String> entry : header.entrySet()) {
+        httppost.setHeader(entry.getKey(), entry.getValue());
+      }
+      String body = httpRequest.getApi().getBody();
+      StringEntity entity = new StringEntity(body, "utf-8");
+      httppost.setEntity(entity);
+
+      try {
+        response = httpclient.execute(httppost);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+      try {
+         reqBody= EntityUtils.toString(response.getEntity());
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+
+    } else if (methodType.equals("GET")) {
+      HttpGet httpGet = new HttpGet(url);
+      Map<String, String> header = httpRequest.getApi().getHeader();
+      for (Map.Entry<String, String> entry : header.entrySet()) {
+        httpGet.setHeader(entry.getKey(), entry.getValue());
+      }
+
+      try {
+        response = httpclient.execute(httpGet);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+      try {
+         reqBody= EntityUtils.toString(response.getEntity());
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
     }
-    StringEntity entity = null;
-    entity = new StringEntity(body, "utf-8");
-
-    httppost.setEntity(entity);
-    //发送post请求
-    CloseableHttpResponse response = null;
-
-    try {
-      response = httpclient.execute(httppost);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-    HttpEntity entity1 = response.getEntity();
-    String reqBody = null;
-    try {
-      reqBody = EntityUtils.toString(entity1);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
     HttpResponse httpResponse = new HttpResponse();
     httpResponse.setBody(reqBody);
 

@@ -1,0 +1,9 @@
+name: dashborad_report
+steps:
+  - test: dashboard_login.yaml #登陆dashboard
+  - test: dashboard_earning_report.yaml #dashboard获取收入报表数据
+  - test: dashboard_payout_report.yaml #dashboard获取payout的报表数据
+
+tags:
+  - dashboard_lastday_report
+desc: demo1

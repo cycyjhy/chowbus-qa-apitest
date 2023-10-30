@@ -1,11 +1,11 @@
 request:
   api:
-    url: https://{{url_staging_03}}/api/v1/login/pin
+    url: https://{{url_staging_03}}/api/v2/login
     method: POST
     body: '{
-	"restaurant_id": "{{restaurant_id}}",
-	"grant_type": "password",
-	"pin": "{{pin}}"
+	"email": "{{dashboard_email_staging_03}}",
+	"password": "{{dashboard_password_staging_03}}",
+	"grant_type": "password"
 }'
     header:
       Content-Type: application/json
@@ -14,12 +14,12 @@ request:
 validation:
   expressions:
     - condition: equals
-      path: family_name
-      value: chen
+      path: email
+      value: "{{dashboard_email_staging_03}}"
 responseParam:
   expressions:
     - path: access_token
       value: access_token
 waitTime: 0
 caseType: http
-desc: pos_app登录接口
+desc: pos_dashboard登录接口

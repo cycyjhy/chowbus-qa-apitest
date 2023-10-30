@@ -1,3 +1,5 @@
 restaurant_id: "10527"
 pin: "9999"
-url_staging_03: pos-api-staging-03.chowbus.com
+url_staging_03: "pos-api-staging-03.chowbus.com"
+dashboard_email_staging_03: "ying.chen+10527@chowbus.com"
+dashboard_password_staging_03: "123456"

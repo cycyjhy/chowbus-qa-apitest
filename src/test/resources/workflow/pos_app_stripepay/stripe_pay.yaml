@@ -124,5 +124,4 @@ responseParam:
       value: order_number
 waitTime: 0
 caseType: http
-role: designer
-desc: pos_app登录接口
+desc: pos新建订单接口

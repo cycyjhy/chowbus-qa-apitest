@@ -13,7 +13,6 @@ public class HttpTestCase {
   private ResponseValidation validation;
   private ResponseParam responseParam;
   private String caseType;
-  private String role;
   private int waitTime;
   private String desc;
 
