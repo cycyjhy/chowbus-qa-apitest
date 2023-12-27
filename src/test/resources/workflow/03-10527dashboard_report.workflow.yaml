@@ -5,5 +5,5 @@ steps:
   - test: dashboard_payout_report.yaml #dashboard获取payout的报表数据
 
 tags:
-  - dashboard_lastday_report
+  - 03-10527dashboard_lastday_report
 desc: demo1

@@ -14,8 +14,8 @@ validation:
 #      value: "report_response"
 responseParam:
   expressions:
-    - path: data.default_aggregator.total_summary_earning.payments.amount
-      value: payment_summary
+#    - path: data.default_aggregator.total_summary_earning.payments.amount
+#      value: payment_summary
 waitTime: 0
 caseType: http
 desc: dashboard报表的接口

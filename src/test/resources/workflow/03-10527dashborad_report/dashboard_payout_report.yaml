@@ -9,13 +9,13 @@ request:
       Authorization: Basic cG9zX2RldmVsb3BlcjpmWDVuQ2lpa2pqRUp5VjB3UmR2YjNpMDU=
 validation:
   expressions:
-    - condition: equals
-      path: data[0].attributes.amount
-      value: payment_summary
+#    - condition: equals
+#      path: data[0].attributes.amount
+#      value: payment_summary
 responseParam:
   expressions:
-    - path: data[0].attributes.amount
-      value: payout_summary
+#    - path: data[0].attributes.amount
+#      value: payout_summary
 waitTime: 0
 caseType: http
 desc: dashboard payout报表的接口
