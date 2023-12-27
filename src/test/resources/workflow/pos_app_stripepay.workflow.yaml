@@ -1,7 +1,8 @@
 name: pos_app_stripepay
 steps:
   - test: app_login.yaml #登陆app
-  - test: stripe_pay.yaml #新建订单接口
+  - test: create_shoppingcart.yaml #新建订单接口
+  - test: create_shoppingcart.yaml #现金支付
 
 tags:
   - pos_app_stripe_pay

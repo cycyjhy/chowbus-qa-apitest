@@ -1,4 +1,4 @@
-name: dashborad_report
+name: 03-10527dashborad_report
 steps:
   - test: dashboard_login.yaml #登陆dashboard
   - test: dashboard_earning_report.yaml #dashboard获取收入报表数据

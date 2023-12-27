@@ -9,9 +9,7 @@ import com.chowbus.qa.datamodel.workflow.WorkflowStep;
 import com.chowbus.qa.utility.TestCaseUtilities;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -93,7 +91,30 @@ public class HttpRequestHandler extends Handler {
         throw new RuntimeException(e);
       }
 
-    } else if (methodType.equals("GET")) {
+    }
+    else if(methodType.equals("PUT")){
+      HttpPut httpPut = new HttpPut(url);
+      Map<String, String> header = httpRequest.getApi().getHeader();
+      for (Map.Entry<String, String> entry : header.entrySet()) {
+        httpPut.setHeader(entry.getKey(), entry.getValue());
+      }
+      String body = httpRequest.getApi().getBody();
+      StringEntity entity = new StringEntity(body, "utf-8");
+      httpPut.setEntity(entity);
+
+      try {
+        response = httpclient.execute(httpPut);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+      try {
+        reqBody= EntityUtils.toString(response.getEntity());
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+
+    }
+    else if (methodType.equals("GET")) {
       HttpGet httpGet = new HttpGet(url);
       Map<String, String> header = httpRequest.getApi().getHeader();
       for (Map.Entry<String, String> entry : header.entrySet()) {
@@ -111,6 +132,26 @@ public class HttpRequestHandler extends Handler {
         throw new RuntimeException(e);
       }
     }
+    else if (methodType.equals("DELETE")) {
+      HttpDelete httpDelete = new HttpDelete(url);
+
+      Map<String, String> header = httpRequest.getApi().getHeader();
+      for (Map.Entry<String, String> entry : header.entrySet()) {
+        httpDelete.setHeader(entry.getKey(), entry.getValue());
+      }
+
+      try {
+        response = httpclient.execute(httpDelete);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+      try {
+        reqBody= EntityUtils.toString(response.getEntity());
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    }
+
     HttpResponse httpResponse = new HttpResponse();
     httpResponse.setBody(reqBody);
 

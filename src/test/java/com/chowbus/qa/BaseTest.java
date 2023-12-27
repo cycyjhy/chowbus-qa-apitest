@@ -85,8 +85,6 @@ public class BaseTest {
 
 
 
-
-
         calendar.setTime(new Date());
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         String monday=dateFormat.format(calendar.getTime());
@@ -115,6 +113,8 @@ public class BaseTest {
         String thismonth_firstday=dateFormat.format(calendar.getTime());
         calendar.set(Calendar.DAY_OF_MONTH,calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
         String thismonth_lastday=dateFormat.format(calendar.getTime());
+        param.put("yesterday",yesterday);
+        param.put("today",today);
 
 
         log.info("初始化生成的全局变量 {} 为:",param);
