@@ -1,0 +1,30 @@
+request:
+  api:
+    url: https://pos-api-staging-03.chowbus.com/api/v2/payments/refunds
+    method: POST
+    body: '{
+	"device_id": "f4bca918-1307-4a2e-a008-c547b336c40e",
+	"refund_requests": [{
+		"id": "{{payment_id}}",
+		"reason": "requested_by_customer",
+		"amount": 544,
+		"is_include_tips": true
+	}]
+}'
+    header:
+      Content-Type: application/json
+      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36
+      Authorization: Bearer {{access_token}}
+validation:
+  expressions:
+#    - condition: not_null
+#      path: order_number
+#      value:
+responseParam:
+  expressions:
+#    - path: data.attributes.available_credit
+#      value: available_credit
+waitTime: 0
+caseType: http
+desc: 查询会员余额

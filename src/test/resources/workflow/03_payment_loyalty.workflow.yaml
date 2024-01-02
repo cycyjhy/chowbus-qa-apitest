@@ -1,0 +1,14 @@
+name: 03_payment_loyalty
+steps:
+  - test: app_login.yaml #登陆app
+  - test: search_loyalty_balance.yaml #查询会员余额
+  - test: create_shoppingcart.yaml #新建订单接口
+  - test: loyalty_pay.yaml #会员余额支付
+  - test: loyalty_credit_record.yaml #生成会员支付记录
+  - test: finish_loyalty_pay.yaml #完成支付
+#  - test: search_loyalty_balance2.yaml #查询会员余额
+#  - test: search_loyalty_transation.yaml #查询会员交易记录
+
+tags:
+  - loyalty_pay
+desc: demo1

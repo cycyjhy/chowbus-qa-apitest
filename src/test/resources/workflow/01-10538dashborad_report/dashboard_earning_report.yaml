@@ -1,0 +1,21 @@
+request:
+  api:
+    url: https://api-staging-01.chowbus.com/restaurant-report/api/v2/earning/report?ts=1698644352786&start_at={{yesterday}}&end_at={{yesterday}}&show_hours=1&order_sources=walk_in%2Ccall_in%2Cqr_code%2Ckiosk%2Cpayment_terminal%2Cexternal%2Cloyalty&service_types=dine_in%2Ctake_out%2Cdelivery%2Cother
+    method: GET
+    body:
+    header:
+      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36
+      Authorization: Bearer {{access_token}}
+validation:
+  expressions:
+#    - condition: equals
+#      path: data.type
+#      value: "report_response"
+responseParam:
+  expressions:
+    - path: data.default_aggregator.total_summary_earning.payments.amount
+      value: payment_summary
+waitTime: 0
+caseType: http
+desc: dashboard报表的接口

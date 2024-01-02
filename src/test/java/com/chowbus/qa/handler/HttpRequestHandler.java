@@ -7,18 +7,24 @@ import com.chowbus.qa.datamodel.http.HttpResponse;
 import com.chowbus.qa.datamodel.http.HttpTestCase;
 import com.chowbus.qa.datamodel.workflow.WorkflowStep;
 import com.chowbus.qa.utility.TestCaseUtilities;
+//import com.fasterxml.jackson.core.type.TypeReference;
+import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.testng.Assert;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 public class HttpRequestHandler extends Handler {
@@ -76,9 +82,30 @@ public class HttpRequestHandler extends Handler {
       for (Map.Entry<String, String> entry : header.entrySet()) {
         httppost.setHeader(entry.getKey(), entry.getValue());
       }
-      String body = httpRequest.getApi().getBody();
-      StringEntity entity = new StringEntity(body, "utf-8");
-      httppost.setEntity(entity);
+      if(header.get("Content-Type").equals("application/json")){
+        String body = httpRequest.getApi().getBody();
+        StringEntity entity = new StringEntity(body, "utf-8");
+        httppost.setEntity(entity);
+      } else if (header.get("Content-Type").equals("application/x-www-form-urlencoded")) {
+        String body = httpRequest.getApi().getBody();
+        Gson gson = new Gson();
+        Map map = gson.fromJson(body, Map.class);
+        List<NameValuePair> list = new ArrayList<NameValuePair>();
+        Iterator iterator = map.entrySet().iterator();
+        while(iterator.hasNext()){
+          Map.Entry<String,String> elem = (Map.Entry<String, String>) iterator.next();
+          list.add(new BasicNameValuePair(elem.getKey(),elem.getValue()));
+        }
+        System.out.println(list);
+        try {
+          httppost.setEntity(new UrlEncodedFormEntity(list));
+        } catch (UnsupportedEncodingException e) {
+          throw new RuntimeException(e);
+        }
+
+
+      }
+
 
       try {
         response = httpclient.execute(httppost);

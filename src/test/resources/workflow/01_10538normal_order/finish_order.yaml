@@ -1,0 +1,192 @@
+request:
+  api:
+    url: https://pos-api-staging-01.chowbus.com/api/v3/shoppingcart/{{order_id}}/finish
+    method: PUT
+    body: '{
+	"checks": [{
+		"id": "{{check_id}}",
+		"pre_tax_line_items_discount": 0,
+		"tax": 59,
+		"billable_total": 0,
+		"total": 559,
+		"line_items": [{
+			"billable_total": 0,
+			"id": "{{line_items_id}}",
+			"line_item_id": "{{dish_item_id1}}",
+			"tax": 59,
+			"pre_tax_line_items_discount": 0,
+			"pre_tax_order_fee": 0,
+			"post_tax_order_fee": 0,
+			"total": 559,
+			"ratio": "1",
+			"sub_total": 500,
+			"pre_tax_order_discount": 0
+		}],
+		"pre_tax_order_discount": 0,
+		"post_tax_order_fee": 0,
+		"number": 1,
+		"pre_tax_order_fee": 0,
+		"sub_total": 500,
+		"status": "paid"
+	}],
+	"tables": [{
+		"entity": "square-table",
+		"foreign_name": "",
+		"table_id": "7debaa64-49cf-4788-9f97-8951ed3c8a2f",
+		"party_size": 1,
+		"is_open_tab": false,
+		"name": "M04",
+		"line_item_ids": ["{{dish_item_id1}}"]
+	}],
+	"fees": [],
+	"table_number": "M04",
+	"order_number": "{{order_number}}",
+	"tip_items": null,
+	"line_items": [{
+		"amount": 500,
+		"meal_prototype_id": "737879",
+		"is_excluded_from_order_discount": false,
+		"created_at": {{nowTime}},
+		"id": "{{dish_item_id1}}",
+		"sequence": 0,
+		"served_at": 0,
+		"category": {
+			"id": "71288",
+			"name": "coffee_category",
+			"foreign_name": "coffee_category"
+		},
+		"special_product_group": null,
+		"description": null,
+		"meal_instance_quantity": 1,
+		"tax_code": "CBT04528533",
+		"quick_notes": null,
+		"member_price": null,
+		"customized_price": 0,
+		"tag": "#1",
+		"complete_time": 0,
+		"is_tax_exempt": false,
+		"meal_instance_id": "1408077",
+		"pre_tax_order_fee": 0,
+		"order_id": "{{order_id}}",
+		"name": "café cappuccino",
+		"tax": 59,
+		"weight_unit": "",
+		"schedule_send_at": 0,
+		"status": "sent",
+		"price_and_quantity_note": "",
+		"foreign_name": "卡布奇诺",
+		"price": 500,
+		"sub_total": 500,
+		"total": 559,
+		"pre_tax_order_discount": 0,
+		"transferred_from_id": "",
+		"sent_at": {{nowTime}},
+		"kitchen_name": "",
+		"pre_tax_line_items_discount": 0,
+		"updated_at": {{nowTime}},
+		"billable_total": 0,
+		"customized_options": [],
+		"reward_offer_id": "",
+		"weight": 0,
+		"menu": {
+			"id": "11473",
+			"name": "10538_01menu",
+			"foreign_name": "10538_01menu"
+		},
+		"post_tax_order_fee": 0,
+		"note": "",
+		"tax_rate": 0,
+		"rushed_at": 0
+	}],
+	"sub_total": 500,
+	"created_at": {{nowTime}},
+	"restaurant_display_at": null,
+	"display_status": "Paid",
+	"discounts": [],
+	"delivery_style": "",
+	"est_delivery_start_at": "",
+	"delivery": null,
+	"total": 559,
+	"sync_status": null,
+	"pre_tax_order_fee": 0,
+	"device_id": "{{device_id}}",
+	"note": "",
+	"tips": 0,
+	"estimated_open_at": null,
+	"employee_name": "YING C",
+	"is_cutoff_order": false,
+	"online_payment_immediately": false,
+	"payments": [{
+		"last4": "4242",
+		"total": 559,
+		"amount": 559,
+		"payment_status": "paid",
+		"brand": "visa",
+		"exp_month": 4,
+		"currency": "usd",
+		"fees": [],
+		"is_refund_tips": false,
+		"is_separate": false,
+		"order_id": "{{order_id}}",
+		"payment_method": "pm_1OTyvVAPQoqa93xj8Z0XP0WR",
+		"id": "{{payment_id}}",
+		"tips": 0,
+		"cardholder_name": "",
+		"payment_type": "card",
+		"change": 0,
+		"payment_intent": "{{client_id}}",
+		"check_id": "{{check_id}}",
+		"tips_editable": false,
+		"fee": 0,
+		"created_at": {{nowTime}},
+		"exp_year": 24
+	}],
+	"service_type": "dine_in",
+	"external_order_id": "",
+	"pre_tax_order_discount": 0,
+	"restaurant_id": "10538",
+	"is_tax_exempt": false,
+	"employee_id": "10071",
+	"refund_total": null,
+	"is_edited": true,
+	"billable_total": 0,
+	"status": "Closed",
+	"post_tax_order_fee": 0,
+	"tax_rate": 0.1174,
+	"prepare_by": null,
+	"est_delivery_end_at": null,
+	"closed_at": {{nowTime}},
+	"pre_tax_line_items_discount": 0,
+	"guests": null,
+	"cart_number": "2",
+	"refunds": null,
+	"is_reopened": false,
+	"batches": [{
+		"dish_item_id": "{{dish_item_id1}}",
+		"order_id": "{{order_id}}",
+		"batch_number": 1
+	}],
+	"id": "{{order_id}}",
+	"updated_at": {{nowTime}},
+	"order_source": "walk_in",
+	"sent_times": 1,
+	"restaurant_started_at": "",
+	"tax": 59
+}'
+    header:
+      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36
+      Authorization: Bearer {{access_token}}
+      Content-Type: application/json
+validation:
+  expressions:
+    - condition: not_null
+      path: id
+      value:
+responseParam:
+  expressions:
+    - path: id
+      value: order_id
+waitTime: 2
+caseType: http
+desc: dashboard payout报表的接口

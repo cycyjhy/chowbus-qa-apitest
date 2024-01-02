@@ -1,0 +1,12 @@
+name: reopen_pay
+steps:
+  - test: app_login.yaml #登陆app
+  - test: create_shoppingcart.yaml #新建订单接口
+  - test: finish_cashpay.yaml #会员余额支付
+  - test: reopen_order.yaml #重开订单
+  - test: create_shoppingcart2.yaml #open后再次生成订单
+
+
+tags:
+  - reopen_pay
+desc: demo1

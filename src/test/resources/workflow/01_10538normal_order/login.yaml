@@ -1,0 +1,25 @@
+request:
+  api:
+    url: https://pos-api-staging-01.chowbus.com/api/v1/login/pin
+    method: POST
+    body: '{
+    "restaurant_id": "10538",
+    "grant_type": "password",
+    "pin": "9999"
+}'
+    header:
+      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36
+      Content-Type: application/json
+validation:
+  expressions:
+    - condition: equals
+      path: email
+      value: "ying.chen+10538@chowbus.com"
+responseParam:
+  expressions:
+    - path: access_token
+      value: access_token
+waitTime: 0
+caseType: http
+desc: login_pos

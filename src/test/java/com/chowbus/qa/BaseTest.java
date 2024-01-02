@@ -56,23 +56,31 @@ public class BaseTest {
         param.put("phonenum", phonenum);
 
         String order_id = UUID.randomUUID().toString().toLowerCase();
+        String device_id = UUID.randomUUID().toString().toLowerCase();
         String dish_item_id1=UUID.randomUUID().toString().toLowerCase();
         String dish_item_id2=UUID.randomUUID().toString().toLowerCase();
+        String line_items_id=UUID.randomUUID().toString().toLowerCase();
         String payment_id=UUID.randomUUID().toString().toLowerCase();
         String check_id=UUID.randomUUID().toString().toLowerCase();
         String customized_id1=UUID.randomUUID().toString().toLowerCase();
         String customized_id2=UUID.randomUUID().toString().toLowerCase();
+        String guidLower=UUID.randomUUID().toString().toLowerCase();
         String cart_number= String.valueOf(new Random().nextInt(99000)+1000);
         long nowTime =new Date().getTime()/1000;
+        long timestamp =new Date().getTime()/1000;
         param.put("order_id",order_id);
+        param.put("device_id",device_id);
         param.put("dish_item_id1",dish_item_id1);
         param.put("dish_item_id2",dish_item_id2);
+        param.put("line_items_id",dish_item_id2);
         param.put("payment_id",payment_id);
         param.put("check_id",check_id);
         param.put("customized_id1",customized_id1);
         param.put("customized_id2",customized_id2);
         param.put("cart_number",cart_number);
+        param.put("guidLower",guidLower);
         param.put("nowTime",String.valueOf(nowTime));
+        param.put("timestamp",String.valueOf(timestamp));
 
 
 

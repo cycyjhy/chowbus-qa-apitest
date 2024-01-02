@@ -1,0 +1,184 @@
+request:
+  api:
+    url: https://pos-api-staging-03.chowbus.com/api/v3/loyalty/credit
+    method: POST
+    body: '{
+	"loyalty_member_id": "c9a7a997-d0f1-44b2-8357-5af1be8f0df5",
+	"order": {
+		"line_items": [{
+			"amount": 400,
+			"meal_prototype_id": "737627",
+			"is_excluded_from_order_discount": false,
+			"created_at": 1698722153,
+			"id": "{{dish_item_id1}}",
+			"sequence": 0,
+			"served_at": 0,
+			"category": {
+				"id": "71216",
+				"name": "10527_category",
+				"foreign_name": "10527_category"
+			},
+			"special_product_group": null,
+			"description": null,
+			"meal_instance_quantity": 1,
+			"tax_code": "CBT14929126",
+			"quick_notes": null,
+			"member_price": 400,
+			"customized_price": 0,
+			"tag": "#1",
+			"complete_time": 0,
+			"is_tax_exempt": false,
+			"meal_instance_id": "1406519",
+			"pre_tax_order_fee": 0,
+			"order_id": "{{order_id}}",
+			"name": "cy_autotest_meal1",
+			"tax": 45,
+			"weight_unit": "",
+			"schedule_send_at": 0,
+			"status": "sent",
+			"price_and_quantity_note": "",
+			"foreign_name": "cy_autotest_meal1",
+			"price": 500,
+			"sub_total": 500,
+			"total": 445,
+			"pre_tax_order_discount": 0,
+			"transferred_from_id": "",
+			"sent_at": 1698722157,
+			"kitchen_name": "",
+			"pre_tax_line_items_discount": 100,
+			"updated_at": 1698722153,
+			"billable_total": 0,
+			"customized_options": [],
+			"reward_offer_id": "",
+			"weight": 0,
+			"menu": {
+				"id": "11404",
+				"name": "10527_01menu",
+				"foreign_name": "10527_01menu"
+			},
+			"post_tax_order_fee": 0,
+			"note": "",
+			"tax_rate": 0,
+			"rushed_at": 0
+		}],
+		"batches": [{
+			"dish_item_id": "{{dish_item_id1}}",
+			"order_id": "{{order_id}}",
+			"batch_number": 1
+		}],
+		"employee_id": "9891",
+		"order_number": "{{order_number}}",
+		"restaurant_display_at": null,
+		"tip_items": null,
+		"total": 445,
+		"is_cutoff_order": false,
+		"updated_at": 1698722178,
+		"is_tax_exempt": false,
+		"closed_at": null,
+		"service_type": "dine_in",
+		"guests": [{
+			"guest_id": "2b22d1be-89e2-4c62-975d-fccf19135e98",
+			"order_id": "{{order_id}}",
+			"is_contact": true,
+			"phone": "+13123839003",
+			"name": "9301",
+			"loyalty_member_id": "c9a7a997-d0f1-44b2-8357-5af1be8f0df5"
+		}],
+		"is_edited": true,
+		"tables": [{
+			"entity": "square-table",
+			"foreign_name": "",
+			"table_id": "1f041233-597f-417a-912c-8936a337f034",
+			"party_size": 1,
+			"is_open_tab": false,
+			"name": "M01",
+			"line_item_ids": ["dish_item_id1"]
+		}],
+		"sent_times": 1,
+		"prepare_by": null,
+		"display_status": "In Progress",
+		"pre_tax_order_discount": 0,
+		"online_payment_immediately": false,
+		"restaurant_id": "10527",
+		"employee_name": "ying c",
+		"is_reopened": false,
+		"tips": 0,
+		"payments": [],
+		"refund_total": null,
+		"sync_status": null,
+		"checks": [{
+			"id": "1867998a-263c-40b6-bae6-92b67f0ef6eb",
+			"pre_tax_line_items_discount": 100,
+			"tax": 45,
+			"billable_total": 0,
+			"total": 445,
+			"line_items": [{
+				"billable_total": 0,
+				"id": "95765944-b89d-4e8b-b1ec-3956fb15b369",
+				"line_item_id": "{{dish_item_id1}}",
+				"tax": 45,
+				"pre_tax_line_items_discount": 100,
+				"pre_tax_order_fee": 0,
+				"post_tax_order_fee": 0,
+				"total": 445,
+				"ratio": "1",
+				"sub_total": 500,
+				"pre_tax_order_discount": 0
+			}],
+			"pre_tax_order_discount": 0,
+			"post_tax_order_fee": 0,
+			"number": 1,
+			"pre_tax_order_fee": 0,
+			"sub_total": 500,
+			"status": "unpaid"
+		}],
+		"device_id": "f4bca918-1307-4a2e-a008-c547b336c40e",
+		"status": "Open",
+		"table_number": "M01",
+		"id": "{{order_id}}",
+		"delivery_style": "",
+		"fees": [],
+		"pre_tax_line_items_discount": 100,
+		"est_delivery_start_at": "",
+		"order_source": "walk_in",
+		"note": "",
+		"restaurant_started_at": "",
+		"refunds": null,
+		"sub_total": 500,
+		"external_order_id": "",
+		"est_delivery_end_at": null,
+		"billable_total": 0,
+		"pre_tax_order_fee": 0,
+		"created_at": 1698722146,
+		"delivery": null,
+		"tax_rate": 0.1125,
+		"estimated_open_at": null,
+		"cart_number": "5",
+		"tax": 45,
+		"post_tax_order_fee": 0
+	},
+	"member_source": "RestaurantMember",
+	"is_last_payment": true,
+	"payment_intent": {
+		"amount": 445,
+		"total": 544,
+		"tips": 99
+	}
+}'
+    header:
+      Content-Type: application/json
+      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36
+      Authorization: Bearer {{access_token}}
+validation:
+  expressions:
+#    - condition: not_null
+#      path: order_number
+#      value:
+responseParam:
+  expressions:
+#    - path: data.attributes.available_credit
+#      value: available_credit
+waitTime: 0
+caseType: http
+desc: 查询会员余额

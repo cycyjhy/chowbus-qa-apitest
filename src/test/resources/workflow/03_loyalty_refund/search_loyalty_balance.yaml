@@ -1,0 +1,26 @@
+request:
+  api:
+    url: https://loyalty-api-staging-03.chowbus.com/api/zh/v2/restaurant_members/fetch
+    method: POST
+    body: '{
+	"only_member": true,
+	"restaurant_id": "10527",
+	"search": "+19301"
+}'
+    header:
+      Content-Type: application/json
+      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36
+      Authorization: Bearer {{access_token}}
+validation:
+  expressions:
+    - condition: equals
+      path: data.attributes.name
+      value: 9301
+responseParam:
+  expressions:
+    - path: data.attributes.available_credit
+      value: available_credit1
+waitTime: 0
+caseType: http
+desc: 查询会员余额

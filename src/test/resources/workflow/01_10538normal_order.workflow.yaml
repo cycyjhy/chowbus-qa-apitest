@@ -1,0 +1,12 @@
+name: 01_10538normal_order
+steps:
+  - test: login.yaml
+  - test: post_order.yaml
+  - test: payment_intent_create.yaml
+  - test: payment_intents_confirm.yaml
+  - test: finish_order.yaml
+
+
+tags:
+  - 01_10538normal_order
+desc: demo1

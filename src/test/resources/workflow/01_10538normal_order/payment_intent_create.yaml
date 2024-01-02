@@ -1,0 +1,37 @@
+request:
+  api:
+    url: https://pos-api-staging-01.chowbus.com/api/v3/payment-intent
+    method: POST
+    body: '{
+  "chowbus_product_line": "pos",
+  "amount": 559,
+  "order_number": "{{order_number}}",
+  "employee_id": "10071",
+  "order_id": "{{order_id}}",
+  "restaurant_id": "10538",
+  "device_id": "{{device_id}}",
+  "currency": "usd",
+  "statement_descriptor": "cy 咖啡吧",
+  "description": "POS*walkIn*Order:KeyIn",
+  "payment_type": "card",
+  "payment_id": "{{payment_id}}"
+}'
+    header:
+      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36
+      Authorization: Bearer {{access_token}}
+      Content-Type: application/json
+validation:
+  expressions:
+    - condition: not_null
+      path: id
+      value:
+responseParam:
+  expressions:
+    - path: client_secret
+      value: client_secret
+    - path: id
+      value: client_id
+waitTime: 0
+caseType: http
+desc:

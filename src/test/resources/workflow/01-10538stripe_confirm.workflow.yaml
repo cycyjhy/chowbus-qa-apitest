@@ -1,0 +1,7 @@
+name: 01-10538stripe_confirm
+steps:
+  - test: stripe_confirm.yaml #登陆dashboard
+
+tags:
+  - 01-10538stripe_confirm
+desc: demo1

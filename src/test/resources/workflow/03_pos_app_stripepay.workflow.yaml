@@ -1,4 +1,4 @@
-name: pos_app_stripepay
+name: 03_pos_app_stripepay
 steps:
   - test: app_login.yaml #登陆app
   - test: create_shoppingcart.yaml #新建订单接口

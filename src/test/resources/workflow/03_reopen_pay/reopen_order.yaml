@@ -1,0 +1,23 @@
+request:
+  api:
+    url: https://pos-api-staging-03.chowbus.com/api/v3/orders?ids={{order_id}}&reopen=1
+    method: DELETE
+    body:
+    header:
+      Content-Type: application/json
+      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36
+      Authorization: Bearer {{access_token}}
+
+validation:
+  expressions:
+    - condition: equals
+      path: id
+      value: "{{order_id}}"
+responseParam:
+#  expressions:
+#    - path: order_number
+#      value: order_number
+waitTime: 0
+caseType: http
+desc: pos新建订单接口
