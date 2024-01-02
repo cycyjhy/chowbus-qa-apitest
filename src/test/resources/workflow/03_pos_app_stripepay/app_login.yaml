@@ -1,0 +1,25 @@
+request:
+  api:
+    url: https://{{url_staging_03}}/api/v1/login/pin
+    method: POST
+    body: '{
+	"restaurant_id": "{{restaurant_id}}",
+	"grant_type": "password",
+	"pin": "{{pin}}"
+}'
+    header:
+      Content-Type: application/json
+      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36
+validation:
+  expressions:
+    - condition: equals
+      path: family_name
+      value: chen
+responseParam:
+  expressions:
+    - path: access_token
+      value: access_token
+waitTime: 0
+caseType: http
+desc: pos_app登录接口
